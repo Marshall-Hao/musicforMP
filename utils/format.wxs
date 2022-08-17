@@ -1,0 +1,30 @@
+function formatCount(count) {
+  var counter = parseInt(count)
+
+  if (count > 100000000) {
+    return (count/100000000).toFixed(1) + '亿'
+  } else if (count > 10000) {
+    return (count/10000).toFixed(1) + '万'
+  } else {
+    return counter + ''
+  }
+}
+// * 形成标准 05:05 格式类似
+function padLeftZero(time) {
+  time = time + ""
+  return ("00"+time).slice(time.length)
+}
+
+function formatDuration(duration) {
+  duration = duration / 1000
+  var minute = Math.floor(duration / 60)
+  var seconds = duration % 60
+
+  return padLeftZero(minute)+ ':' + padLeftZero(seconds)
+}
+
+// * common js es5导出
+module.exports = {
+  formatCount:formatCount,
+  formatDuration:formatDuration
+}
