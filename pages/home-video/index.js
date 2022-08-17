@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    hasMore: true
   },
 
   /**
@@ -16,11 +16,11 @@ Page({
    */
   onLoad: async function (options) {
     // * 封装网络请求
-    const res = await getTopMVs(0)
-    this.setData({
-      topMvs:res.data
-    })
-  
+    // const res = await getTopMVs(0)
+    // this.setData({
+    //   topMvs:res.data
+    // })
+    this.getTopMVs()
  
   },
 
@@ -55,15 +55,26 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
+  onPullDownRefresh:async function () {
+    // const res = await getTopMVs(0)
+    // this.setData({
+    //   topMvs:res.data
+    // })
+    this.getTopMVs()
+    this.setData({
+      hasMore: true
+    })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
+  onReachBottom: async function () {
+    // const res = await getTopMVs(this.data.topMvs.length)
+    // this.setData({
+    //   topMvs: this.data.topMvs.concat(res.data)
+    // })
+    this.getTopMVs(this.data.topMvs.length)
   },
 
   /**
@@ -71,5 +82,35 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  getTopMVs: async function(offset = 0) {
+    if (!this.data.hasMore && offset !== 0) return
+    // * 展示加载动画
+    wx.showNavigationBarLoading()
+    // * 相当于主动触发 就会无限回调用 触发
+    // if (offset === 0) {
+    //   wx.startPullDownRefresh()
+    // }
+    const res = await getTopMVs(offset)
+    let newData = []
+    if (offset === 0) {
+      newData = res.data
+    } else {
+      newData = this.data.topMvs.concat(res.data)
+    }
+
+    this.setData({
+      topMvs:newData
+    })
+    this.setData({
+      hasMore: res.hasMore
+    })
+
+    // * 停止动画
+    wx.hideNavigationBarLoading()
+    if (offset === 0) {
+      wx.stopPullDownRefresh()
+    }
   }
 })
