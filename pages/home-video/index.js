@@ -12,14 +12,15 @@ Page({
 
   /**
    * 生命周期函数--监听页面加载
+   * 不要滥用async await 会影响性能
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
     // * 封装网络请求
-    getTopMVs(0).then(res=> {
-      this.setData({
-        topMvs:res.data.data
-      })
+    const res = await getTopMVs(0)
+    this.setData({
+      topMvs:res.data
     })
+  
  
   },
 

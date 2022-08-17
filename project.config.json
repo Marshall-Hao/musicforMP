@@ -47,7 +47,7 @@
     "useCompilerPlugins": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.19.4",
+  "libVersion": "2.25.2",
   "appid": "wxd203f2a6d5477bc9",
   "projectname": "mpMusic",
   "debugOptions": {
