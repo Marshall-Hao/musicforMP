@@ -32,3 +32,8 @@
 <view class="recommend-song">
   <area-header title="歌曲推荐"></area-header>
 </view>
+<view class="song-list">
+  <block wx:for="{{recommendSongs}}" wx:key="index">
+   <song-item-v1 item="{{item}}"></song-item-v1>
+  </block>
+</view>
