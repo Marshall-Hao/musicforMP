@@ -23,6 +23,12 @@
           "pathName": "pages/detail-video/index",
           "query": "id=14556339",
           "scene": null
+        },
+        {
+          "name": "home",
+          "pathName": "pages/home-music/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
