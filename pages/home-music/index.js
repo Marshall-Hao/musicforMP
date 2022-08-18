@@ -1,6 +1,11 @@
 // pages/home-music/index.js
 
 import {getBanners} from '../../services/api_musics'
+import {queryRect} from '../../utils/selectorRec'
+import throttle from '../../utils/throttle'
+
+const thorttleQueryRect = throttle(queryRect)
+
 Page({
 
 
@@ -23,11 +28,8 @@ Page({
 
   handleImageLoad() {
     // * swiper组件与图片进行完全的匹配 在任何机型上
-    const query = wx.createSelectorQuery()
-    query.select('.swiper-image').boundingClientRect()
-    // * 视口滚动绑定
-    // query.selectViewport().scrollOffset()
-    query.exec(res => {
+    // * 减低调用频率，只要一次 节流
+    thorttleQueryRect('.swiper-image').then(res =>{
       const rect = res[0]
       this.setData({
         swiperHeight: rect.height
