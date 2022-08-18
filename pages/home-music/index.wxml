@@ -7,3 +7,23 @@
   disabled
   bind:click-input="handleSearchClick"
 />
+
+<!-- banner -->
+<swiper class="swiper" 
+        indicator-dots
+        autoplay
+        circular
+        style="height: {{swiperHeight}}px;"
+>
+  <block wx:for="{{banners}}" wx:key="index">
+    <swiper-item class="swiper-item">
+     <!--图片加载完事件 -->
+      <image class="swiper-image" 
+             src="{{item.pic}}" 
+             mode="widthFix"
+             bindload="handleImageLoad"
+             >
+      </image>
+    </swiper-item>
+  </block>
+</swiper>

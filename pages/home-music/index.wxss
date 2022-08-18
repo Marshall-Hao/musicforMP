@@ -2,3 +2,16 @@
 .van-search__content {
   background-color: white !important
 }
+
+.swiper {
+
+}
+
+.swiper-item {
+  /* 去除图片底部3px */
+  display: flex;
+}
+
+.swiper-item image {
+  width: 100%;
+}
