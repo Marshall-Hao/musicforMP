@@ -2,9 +2,18 @@
 .van-search__content {
   background-color: white !important
 }
+.van-search {
+  padding: 20rpx 0 !important;
+}
 
+page {
+  padding: 0 20rpx;
+}
 .swiper {
-
+  border-radius: 12rpx;
+  overflow: hidden;
+  /* webview bug可能 修复方案 */
+  transform: translateY(0);
 }
 
 .swiper-item {

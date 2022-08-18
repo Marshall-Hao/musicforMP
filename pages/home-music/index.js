@@ -31,6 +31,7 @@ Page({
     // * 减低调用频率，只要一次 节流
     thorttleQueryRect('.swiper-image').then(res =>{
       const rect = res[0]
+      // * setData 改变数据是同步，但是渲染是异步的
       this.setData({
         swiperHeight: rect.height
       })

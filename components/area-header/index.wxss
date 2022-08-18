@@ -1,0 +1,29 @@
+/* components/area-header/index.wxss */
+.title {
+  color: #333;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}
+
+/* * empty 当这个元素内容为空时的class slot插槽没东西插入就是空+ 兄弟选择器*/
+.header .slot:empty + .default {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .default {
+  display: none;
+  align-items: center;
+  font-size: 28rpx;
+  color: #777
+}
+
+.header .default .icon {
+  width: 50rpx;
+  height: 50rpx;
+}

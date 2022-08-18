@@ -1,4 +1,5 @@
-<video class="video" autoplay src="{{mvUrlInfo}}"></video>
+<!-- * 解决video无法播放问题 可能是跨域 -->
+<video class="video" autoplay src="{{mvUrlInfo}}" referrer-policy="origin"></video>
 
 <wxs src="../../utils/format.wxs" module="format"></wxs>
 <view class="info">
