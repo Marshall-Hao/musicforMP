@@ -112,5 +112,13 @@ Page({
     if (offset === 0) {
       wx.stopPullDownRefresh()
     }
+  },
+
+  //  封装事件点击处理
+  handleVideoClick(e) {
+    const id = e.currentTarget.dataset.item.id
+    wx.navigateTo({
+      url: `/pages/detail-video/index?id=${id}`,
+    })
   }
 })

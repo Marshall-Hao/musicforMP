@@ -23,6 +23,9 @@ function formatDuration(duration) {
   return padLeftZero(minute)+ ':' + padLeftZero(seconds)
 }
 
+
+
+
 // * common js es5导出
 module.exports = {
   formatCount:formatCount,
