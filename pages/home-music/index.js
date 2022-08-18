@@ -1,5 +1,5 @@
 // pages/home-music/index.js
-
+import {rankingStore} from '../../store/index'
 import {getBanners} from '../../services/api_musics'
 import {queryRect} from '../../utils/selectorRec'
 import throttle from '../../utils/throttle'
@@ -11,12 +11,22 @@ Page({
 
   data: {
     banners: [],
-    swiperHeight: 60
+    swiperHeight: 60,
+    recommendSongs: []
   },
 
 
   onLoad: function (options) {
     this.getPageData()
+    // * 执行action
+    rankingStore.dispatch("getRankingDataAction")
+    //  获取store中的数据
+    rankingStore.onState('hotRanking',res=>{
+      const recommendSongs = res.tracks?.slice(0,6)
+      this.setData({
+        recommendSongs
+      })
+    })
   },
 
   // * events

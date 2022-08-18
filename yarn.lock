@@ -6,3 +6,8 @@
   version "1.10.4"
   resolved "https://registry.yarnpkg.com/@vant/weapp/-/weapp-1.10.4.tgz#f6c8cb3f297cdb88b869177f351dc98fe49e6ddb"
   integrity sha512-S0T6myy4Ve4ZClRujJKP1Eu5hP5GFkVeQH587uakhacrQ+9Fp23gfnmo+dKMf7FbjTRqQu+ehxcr0Ba75iV8HA==
+
+hy-event-store@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/hy-event-store/-/hy-event-store-1.2.1.tgz#542c4f30107a7c986485545d32098d1339fb1a62"
+  integrity sha512-viMS7Zj1VmFgkAENrJr0lMV29FWzaSgLg1gTcZ+WJXuPO+SOhehWqALoJIDGms02qG+tO+++VsPkgD0rXlAikA==
