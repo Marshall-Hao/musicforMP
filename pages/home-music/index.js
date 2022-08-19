@@ -1,8 +1,13 @@
 // pages/home-music/index.js
-import {rankingStore} from '../../store/index'
+import {rankingStore,rankingMap} from '../../store/index'
 import {getBanners,getSongMenu} from '../../services/api_musics'
 import {queryRect} from '../../utils/selectorRec'
 import throttle from '../../utils/throttle'
+const RANKING_MAP = {
+  0:'newRanking',
+  1:'originalRanking',
+  2:'upRanking'
+}
 
 const thorttleQueryRect = throttle(queryRect)
 Page({
@@ -74,7 +79,19 @@ Page({
       })
     })
   },
+  handleMoreClick() {
+    this.navigateToDetailSongsPage('hotRanking')
+  },
+  handleRankingItemClick(e) {
+    const idx = e.currentTarget.dataset.idx
+    this.navigateToDetailSongsPage(RANKING_MAP[idx])
+  },
 
+  navigateToDetailSongsPage(rankingName) {
+    wx.navigateTo({
+      url: `/pages/detail-lists/index?ranking=${rankingName}`,
+    })
+  },
   // * services
   getPageData() {
     getBanners().then(res=> {

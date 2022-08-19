@@ -20,9 +20,9 @@ const rankingStore = new HYEventStore({
     getRankingDataAction(ctx) {
       for (let i=0;i<4;i++) {
         getRankings(i).then(res=>{
-          console.log(i)
-          console.log(rankingMap[i])
-          console.log(res.playlist.name)
+          // console.log(i)
+          // console.log(rankingMap[i])
+          // console.log(res.playlist.name)
           ctx[rankingMap[i]] = res.playlist
           // switch(i) {
           //   case 0:
@@ -46,4 +46,4 @@ const rankingStore = new HYEventStore({
   }
 })
 
-export {rankingStore}
+export {rankingStore,rankingMap}

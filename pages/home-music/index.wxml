@@ -30,7 +30,7 @@
 
 <!-- recommed -->
 <view class="recommend-song" wx:if="{{recommendSongs.length}}">
-  <area-header title="歌曲推荐"></area-header>
+  <area-header title="歌曲推荐" bind:click="handleMoreClick"></area-header>
   <view class="song-list">
     <block wx:for="{{recommendSongs}}" wx:key="index">
     <song-item-v1 item="{{item}}"></song-item-v1>
@@ -48,7 +48,12 @@
   <view class="ranking-list">
     <block wx:for="{{ranking}}" wx:key="name">
     <!-- Object 的 item 直接就是value, index是key -->
-      <ranking-area-item item="{{item}}"></ranking-area-item>
+      <ranking-area-item 
+      item="{{item}}" 
+      bindtap="handleRankingItemClick"
+      data-idx="{{index}}"
+      >
+      </ranking-area-item>
     </block>
   </view>
 </view>

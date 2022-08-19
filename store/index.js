@@ -1,6 +1,7 @@
 // * 优雅导出
-import {rankingStore} from './ranking-store'
+import {rankingStore,rankingMap} from './ranking-store'
 
 export {
-  rankingStore
+  rankingStore,
+  rankingMap
 }

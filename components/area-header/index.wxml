@@ -3,7 +3,7 @@
   <view class="title">{{title}}</view>
   <!-- * slot -->
   <view class="slot"><slot></slot></view>
-  <view class="default">
+  <view class="default" bindtap="handleRightClick">
     <text>{{rightText}}</text>
     <image class="icon" src="../../assets/images/icons/arrow-right.png"></image>
   </view>
