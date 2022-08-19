@@ -29,6 +29,12 @@
           "pathName": "pages/home-music/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "detailPlaylists",
+          "pathName": "pages/detail-lists/index",
+          "query": "ranking=newRanking",
+          "scene": null
         }
       ]
     }
