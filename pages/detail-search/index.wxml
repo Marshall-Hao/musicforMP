@@ -5,3 +5,13 @@
   placeholder="请输入喜欢的歌曲"  
   background="#fafafa"
 />
+
+<!-- hot search -->
+<view class="keywords">
+  <view class="title">热门搜索</view>
+  <view class="list">
+    <block wx:for="{{hotKeywords}}" wx:key="first">
+      <text class="tag" bindtap="handleTagClick" data-value="{{item.first}}">{{item.first}}</text>
+    </block>
+  </view>
+</view>
