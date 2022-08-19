@@ -23,7 +23,7 @@ Page({
     rankingStore.dispatch("getRankingDataAction")
     //  获取store中的数据
     rankingStore.onState('hotRanking',res=>{
-      const recommendSongs = res.tracks?.slice(0,6)
+      const recommendSongs = res?.tracks?.slice(0,6)
       this.setData({
         recommendSongs
       })

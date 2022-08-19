@@ -29,15 +29,20 @@
 </swiper>
 
 <!-- recommed -->
-<view class="recommend-song">
+<view class="recommend-song" wx:if="{{recommendSongs.length}}">
   <area-header title="歌曲推荐"></area-header>
-</view>
-<view class="song-list">
-  <block wx:for="{{recommendSongs}}" wx:key="index">
-   <song-item-v1 item="{{item}}"></song-item-v1>
-  </block>
+  <view class="song-list">
+    <block wx:for="{{recommendSongs}}" wx:key="index">
+    <song-item-v1 item="{{item}}"></song-item-v1>
+    </block>
+  </view>
 </view>
 
 <!-- playlist -->
 <song-menu songMenu="{{hotPlaylist}}" title="热门歌单"></song-menu>
 <song-menu songMenu="{{recommednPlaylist}}" title="推荐歌单"></song-menu>
+
+<!-- billboard -->
+<view class="ranking">
+  <area-header title="巅峰榜"><text></text></area-header>
+</view>
