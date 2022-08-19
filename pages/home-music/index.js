@@ -13,7 +13,9 @@ Page({
     swiperHeight: 60,
     recommendSongs: [],
     hotPlaylist:[],
-    recommednPlaylist:[]
+    recommednPlaylist:[],
+    // * 为了固定的顺序
+    ranking:{0:{},1:{},2:{}}
   },
 
 
@@ -28,6 +30,30 @@ Page({
         recommendSongs
       })
     })
+    rankingStore.onState('newRanking',this.getRankingHandler(0))
+    rankingStore.onState('originalRanking',this.getRankingHandler(1))
+    rankingStore.onState('upRanking',this.getRankingHandler(2))
+  },
+
+  onUnload: function() {
+
+  },
+
+  // * store
+  // * 高阶方程
+  getRankingHandler(idx) {
+    return (res) =>{
+      if (!res || !Object.keys(res).length) return
+      const name = res.name
+      const coverImgUrl = res.coverImgUrl
+      const songList = res.tracks.slice(0,3)
+      const playCount = res.playCount
+      const rankingObj = {name,coverImgUrl,songList,playCount}
+      const newRanking = {...this.data.ranking,[idx]:rankingObj}
+      this.setData({
+        ranking: newRanking
+      })
+    }
   },
 
   // * events

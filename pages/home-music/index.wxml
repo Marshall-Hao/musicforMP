@@ -45,4 +45,10 @@
 <!-- billboard -->
 <view class="ranking">
   <area-header title="巅峰榜"><text></text></area-header>
+  <view class="ranking-list">
+    <block wx:for="{{ranking}}" wx:key="name">
+    <!-- Object 的 item 直接就是value, index是key -->
+      <ranking-area-item item="{{item}}"></ranking-area-item>
+    </block>
+  </view>
 </view>

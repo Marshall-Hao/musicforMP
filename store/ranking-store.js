@@ -3,10 +3,10 @@ import {getRankings} from '../services/api_musics'
 
 // * 代码的switch 逻辑判断优化 用map代替
 const rankingMap = {
-  0:"newRanking",
-  1:"hotRanking",
+  0:"upRanking",
+  1:"newRanking",
   2:"originalRanking",
-  3:"upRanking"
+  3:"hotRanking"
 }
 
 const rankingStore = new HYEventStore({
@@ -20,6 +20,9 @@ const rankingStore = new HYEventStore({
     getRankingDataAction(ctx) {
       for (let i=0;i<4;i++) {
         getRankings(i).then(res=>{
+          console.log(i)
+          console.log(rankingMap[i])
+          console.log(res.playlist.name)
           ctx[rankingMap[i]] = res.playlist
           // switch(i) {
           //   case 0:
@@ -35,6 +38,8 @@ const rankingStore = new HYEventStore({
           //     console.log('飙升',res)
           //     break;
           // }
+        }).catch(e=>{
+          console.error(e)
         })
       }
     }
