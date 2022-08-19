@@ -14,6 +14,13 @@ page {
   box-sizing: border-box;
 }
 
+.van-search__content {
+  background-color: white !important
+}
+.van-search {
+  padding: 20rpx 0 !important;
+}
+
 .van-cell {
   background-color: transparent !important;
 }

@@ -1,2 +1,7 @@
 <!--pages/detail-search/index.wxml-->
-<text>pages/detail-search/index.wxml</text>
+<!-- Search -->
+<van-search 
+  shape="round" 
+  placeholder="请输入喜欢的歌曲"  
+  background="#fafafa"
+/>

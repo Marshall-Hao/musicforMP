@@ -1,9 +1,9 @@
 <!--pages/detail-lists/index.wxml-->
 <block wx:if="{{type==='rank'}}">
-  <area-header title="{{rankingInfo.name}}"><text></text></area-header>
+  <area-header title="{{songInfo.name}}"><text></text></area-header>
 </block>
 <block wx:elif="{{type === 'menu'}}">
-  <view>歌单哦！</view>
+  <song-detail-header songInfo="{{songInfo}}"></song-detail-header>
 </block>
 
 <view class="song-list">

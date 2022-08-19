@@ -41,6 +41,12 @@
           "pathName": "pages/detail-lists/index",
           "query": "id=4865548839&type=menu",
           "scene": null
+        },
+        {
+          "name": "search",
+          "pathName": "pages/detail-search/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
