@@ -11,17 +11,17 @@
 
 .menu-item {
   display: inline-block;
-  width: 200rpx;
-  height: 200rpx;
-  background-color: red;
   vertical-align: top;
   margin-top: 10rpx;
-  margin-left:20rpx ;
+  margin-left:20rpx;
+  /* 因为会沿用父级元素 设置固定宽度 比例高度 */
+  width:220rpx;
+}
+
+.menu-item:last-of-type {
+  margin-right: 20rpx;
 }
 
 /* .menu-item:not(:first-of-type) {
 } */
 
-.menu-item:last-of-type {
-  margin-right: 20rpx;
-}

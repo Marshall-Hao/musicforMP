@@ -39,4 +39,5 @@
 </view>
 
 <!-- playlist -->
-<song-menu></song-menu>
+<song-menu songMenu="{{hotPlaylist}}" title="热门歌单"></song-menu>
+<song-menu songMenu="{{recommednPlaylist}}" title="推荐歌单"></song-menu>

@@ -13,3 +13,12 @@ export function getRankings(idx) {
     })
   })
 }
+
+export function getSongMenu(cat="全部",limit=6,offset=10) {
+    return hyRequest.get('top/playlist',{
+      cat,
+      limit,
+      offset
+    })
+
+}
