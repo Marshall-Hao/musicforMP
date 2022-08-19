@@ -5,14 +5,13 @@ import {queryRect} from '../../utils/selectorRec'
 import throttle from '../../utils/throttle'
 
 const thorttleQueryRect = throttle(queryRect)
-
 Page({
 
 
   data: {
     banners: [],
     swiperHeight: 60,
-    recommendSongs: []
+    recommendSongs: [],
   },
 
 

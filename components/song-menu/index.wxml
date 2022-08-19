@@ -1,0 +1,8 @@
+<!--components/song-menu/index.wxml-->
+<area-header title="热门歌单"></area-header>
+
+<scroll-view scroll-x class="menu-list">
+    <block wx:for="{{6}}" wx:key="index">
+      <view class="menu-item"></view>
+    </block>
+</scroll-view>

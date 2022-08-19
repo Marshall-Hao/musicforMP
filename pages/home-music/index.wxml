@@ -37,3 +37,6 @@
    <song-item-v1 item="{{item}}"></song-item-v1>
   </block>
 </view>
+
+<!-- playlist -->
+<song-menu></song-menu>

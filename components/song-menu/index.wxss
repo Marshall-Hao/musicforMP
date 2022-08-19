@@ -1,0 +1,27 @@
+/* components/song-menu/index.wxss */
+
+.menu-list {
+  /* 方案二 用视口宽度 */
+  width: 100vw;
+  white-space: nowrap;
+  /* 相对定位对齐页面 */
+  position: relative;
+  left:-20rpx
+}
+
+.menu-item {
+  display: inline-block;
+  width: 200rpx;
+  height: 200rpx;
+  background-color: red;
+  vertical-align: top;
+  margin-top: 10rpx;
+  margin-left:20rpx ;
+}
+
+/* .menu-item:not(:first-of-type) {
+} */
+
+.menu-item:last-of-type {
+  margin-right: 20rpx;
+}
