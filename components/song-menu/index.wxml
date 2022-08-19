@@ -3,6 +3,11 @@
 
 <scroll-view scroll-x class="menu-list">
     <view class="menu-item" wx:for="{{songMenu}}" wx:key="id">
-      <song-menu-item item="{{item}}"></song-menu-item>
+      <song-menu-item 
+      item="{{item}}" 
+      bindtap="handleMenuItemClick"
+      data-item="{{item}}"
+      >
+      </song-menu-item>
     </view>
 </scroll-view>

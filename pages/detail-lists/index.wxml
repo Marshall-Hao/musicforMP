@@ -1,8 +1,13 @@
 <!--pages/detail-lists/index.wxml-->
-<area-header title="{{rankingInfo.name}}"><text></text></area-header>
+<block wx:if="{{type==='rank'}}">
+  <area-header title="{{rankingInfo.name}}"><text></text></area-header>
+</block>
+<block wx:elif="{{type === 'menu'}}">
+  <view>歌单哦！</view>
+</block>
 
 <view class="song-list">
-  <block wx:for="{{rankingInfo.tracks}}" wx:key="index">
+  <block wx:for="{{songInfo.tracks}}" wx:key="index">
     <song-item-v2 item="{{item}}" index="{{index+1}}"></song-item-v2>
   </block>
 </view>

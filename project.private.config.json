@@ -35,6 +35,12 @@
           "pathName": "pages/detail-lists/index",
           "query": "ranking=newRanking",
           "scene": null
+        },
+        {
+          "name": "detailmenu",
+          "pathName": "pages/detail-lists/index",
+          "query": "id=4865548839&type=menu",
+          "scene": null
         }
       ]
     }
