@@ -1,5 +1,8 @@
 // pages/detail-search/index.js
 import {getHotSearch,getSuggestSearch} from '../../services/api_search'
+import debounce from '../../utils/debounce'
+
+const debounceGetSearchSuggest = debounce(getSuggestSearch,300)
 
 Page({
 
@@ -41,7 +44,7 @@ Page({
     this.setData({
       searchValue
     })
-    getSuggestSearch(searchValue).then(res=>{
+    debounceGetSearchSuggest(searchValue).then(res=>{
       this.setData({
         suggestSongs:res.result.allMatch
       })
