@@ -49,6 +49,8 @@ Page({
         suggestSongs:[],
         resultSongs:[]
       })
+      // * 因为是防抖，“”不会执行 所以会执行上一次的 会有结果 
+      debounceGetSearchSuggest.cancel()
       return
     }
     debounceGetSearchSuggest(searchValue).then(res=>{
