@@ -1,4 +1,4 @@
-const BASE_URL = "http://123.207.32.32:9001/"
+const BASE_URL = "http://localhost:3000/"
 
 class HYRequest {
   request(url,method,params) {
