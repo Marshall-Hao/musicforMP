@@ -1,5 +1,5 @@
 // pages/detail-search/index.js
-import {getHotSearch,getSuggestSearch} from '../../services/api_search'
+import {getHotSearch,getSuggestSearch,getSearchResult} from '../../services/api_search'
 import debounce from '../../utils/debounce'
 import stringToNodes from '../../utils/string2nodes'
 
@@ -15,7 +15,8 @@ Page({
     hotKeywords:[],
     suggestSongs:[],
     searchValue:'',
-    suggestSongsNodes:[]
+    suggestSongsNodes:[],
+    resultSongs: []
   },
 
   /**
@@ -41,8 +42,12 @@ Page({
     // * 优化搜索值为空的逻辑，因为直接retun 还保留之前的建议列表
     if (!searchValue) {
       this.setData({
-        suggestSongs:[]
+        suggestSongs:[],
       })
+      this.setData({
+        searchValue
+      })
+      return
     }
     this.setData({
       searchValue
@@ -65,5 +70,21 @@ Page({
         suggestSongsNodes
       })
     })
+  },
+
+  handleSearchAction() {
+    const {searchValue} = this.data
+    getSuggestSearch(searchValue).then(res=>{
+      this.setData({
+        resultSongs:res.result.allMatch
+      })
+    })
+  },
+  handleSuggestItemClick(e) {
+    const keyword = e.currentTarget.dataset.item
+
+    this.setData({searchValue:keyword})
+
+    this.handleSearchAction()
   }
 })

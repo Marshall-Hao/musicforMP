@@ -6,25 +6,26 @@
   placeholder="请输入喜欢的歌曲"  
   background="#fafafa"
   bind:change="handleSearchChange"
+  bind:search="handleSearchAction"
 />
 
 <!-- hot search -->
 <!--wx:if 优化 -->
-<view class="keywords" hidden="{{suggestSongs.length}}">
+<view class="keywords" hidden="{{searchValue || suggestSongs.length }}">
   <view class="title">热门搜索</view>
   <view class="list">
     <block wx:for="{{hotKeywords}}" wx:key="first">
-      <text class="tag" bindtap="handleTagClick" data-value="{{item.first}}">{{item.first}}</text>
+      <text class="tag" bindtap="handleSuggestItemClick" data-item="{{item.first}}">{{item.first}}</text>
     </block>
   </view>
 </view>
 
 <!-- suggest search -->
-<view class="suggest" hidden="{{!suggestSongs.length}}">
+<view class="suggest" hidden="{{!searchValue || !suggestSongs.length}}">
     <view class="title">搜索“{{searchValue}}”</view>
     <view class="list">
       <block wx:for="{{suggestSongs}}" wx:key="keyword">
-        <view class="list-item">
+        <view class="list-item" bindtap="handleSuggestItemClick" data-item="{{item.keyword}}">
           <image class="icon" mode="widthFix" src="/assets/images/icons/search_icon.png"></image>
           <!-- <text class="text">{{item.keyword}}</text> -->
           <rich-text nodes="{{suggestSongsNodes[index]}}"></rich-text>
@@ -32,3 +33,5 @@
       </block>
     </view>
 </view>
+
+<!-- search Result -->

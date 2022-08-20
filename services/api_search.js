@@ -9,3 +9,9 @@ export function getSuggestSearch(keywords) {
     type:'mobile'
   })
 }
+
+export function getSearchResult(keywords) {
+  hyRequest.get('search', {
+    keywords
+  })
+}

@@ -8,7 +8,7 @@
     const node1 = {
       name:'span',
       attrs:{
-        style:"color:#26ce8a"
+        style:"color:#26ce8a;font-size:14px"
       },
       children:[{type:"text", text:key1}]
     }
@@ -16,7 +16,7 @@
     const node2 = {
       name:'span',
       attrs:{
-        style:"color:#000000"
+        style:"color:#000000;font-size:14px"
       },
       children:[{type:"text", text:key2}]
     }
@@ -25,7 +25,7 @@
     const node3 = {
       name:'span',
       attrs:{
-        style:"color:#000000"
+        style:"color:#000000;font-size:14px"
       },
       children:[{type:"text", text:keyword}]
     }
