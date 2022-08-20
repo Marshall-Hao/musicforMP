@@ -2,3 +2,11 @@
 <!-- bg -->
 <image class="bg-image" mode="aspectFill" src="{{currentSong.al.picUrl}}"></image>
 <view class="bg-cover"></view>
+
+<!-- custom nav bar -->
+<nav-bar>
+  <view class="tab" slot="title">
+    <view>歌曲</view>
+    <view>歌词</view>
+  </view>
+</nav-bar>
