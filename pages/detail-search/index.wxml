@@ -1,5 +1,8 @@
 <!--pages/detail-search/index.wxml-->
+
+<wxs src="../../utils/format.wxs" module="format"></wxs>
 <!-- Search -->
+<!-- * 优化体验 -->
 <van-search 
   value="{{searchValue}}"
   shape="round" 
@@ -7,11 +10,12 @@
   background="#fafafa"
   bind:change="handleSearchChange"
   bind:search="handleSearchAction"
+  show-action="{{searchValue}}"
 />
 
 <!-- hot search -->
 <!--wx:if 优化 -->
-<view class="keywords" hidden="{{searchValue || suggestSongs.length }}">
+<view class="keywords" hidden="{{searchValue.length || suggestSongs.length }}">
   <view class="title">热门搜索</view>
   <view class="list">
     <block wx:for="{{hotKeywords}}" wx:key="first">
@@ -21,7 +25,7 @@
 </view>
 
 <!-- suggest search -->
-<view class="suggest" hidden="{{!searchValue || !suggestSongs.length}}">
+<view class="suggest" hidden="{{!searchValue.length || !suggestSongs.length || resultSongs.length}}">
     <view class="title">搜索“{{searchValue}}”</view>
     <view class="list">
       <block wx:for="{{suggestSongs}}" wx:key="keyword">
@@ -35,3 +39,11 @@
 </view>
 
 <!-- search Result -->
+<view class="result" hidden="{{!resultSongs.length}}">
+  <view class="title">最佳匹配</view>
+  <view class="list">
+    <block wx:for="{{resultSongs}}" wx:key="index">
+      <song-item-v2 item="{{format.formatObject(item)}}" index="{{index}}"></song-item-v2>
+    </block>
+  </view>
+</view>

@@ -23,11 +23,15 @@ function formatDuration(duration) {
   return padLeftZero(minute)+ ':' + padLeftZero(seconds)
 }
 
-
-
+function formatObject(obj) {
+  return {
+    name: obj.keyword
+  }
+}
 
 // * common js es5导出
 module.exports = {
   formatCount:formatCount,
-  formatDuration:formatDuration
+  formatDuration:formatDuration,
+  formatObject:formatObject
 }

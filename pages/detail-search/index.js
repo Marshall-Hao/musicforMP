@@ -39,19 +39,18 @@ Page({
   handleSearchChange(e) {
     const searchValue = e.detail
 
+    this.setData({
+      searchValue,
+      resultSongs:[]
+    })
     // * 优化搜索值为空的逻辑，因为直接retun 还保留之前的建议列表
     if (!searchValue) {
       this.setData({
         suggestSongs:[],
-      })
-      this.setData({
-        searchValue
+        resultSongs:[]
       })
       return
     }
-    this.setData({
-      searchValue
-    })
     debounceGetSearchSuggest(searchValue).then(res=>{
       const suggestSongs = res.result.allMatch
       this.setData({
@@ -73,6 +72,8 @@ Page({
   },
 
   handleSearchAction() {
+    // * 可以添加历史搜索功能 使用LRU 优化
+
     const {searchValue} = this.data
     getSuggestSearch(searchValue).then(res=>{
       this.setData({
