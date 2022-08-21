@@ -28,3 +28,113 @@
 .tab .active {
   color: #fff
 }
+
+.content {
+  color: #fff;
+}
+
+.content .music {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 30rpx 60rpx;
+}
+
+/* 封面 */
+.album {
+  display: flex;
+  align-items: center;
+  /* *flex给数值就是 比例分配 */
+  flex: 4;
+}
+
+.album .image {
+  width: 100%;
+  border-radius: 12rpx;
+}
+
+/* 歌曲信息 */
+.music .info {
+  margin: 20rpx 0;
+}
+
+.music .info .title {
+  font-size: 48rpx;
+  font-weight: 700;
+}
+
+.music .info .singer, .alias {
+  font-size: 26rpx;
+  color: #ccc;
+  margin: 16rpx 0;
+}
+
+/* 歌词 */
+.music .lyric {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*  */
+  flex: 1;
+}
+
+/* 进度 */
+.progress {
+  margin: 10rpx 0;
+}
+
+.slider {
+  margin: 0 0 18rpx 20rpx;
+}
+
+.time {
+  display: flex;
+  justify-content: space-between;
+  color: #ccc;
+  font-size: 22rpx;
+}
+
+.time .current {
+  margin-left: 10rpx;
+}
+
+
+/* 操作css */
+.operation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20rpx 0 30rpx;
+}
+
+.operation .btn {
+  display: inline-block;
+  width: 60rpx;
+  height: 60rpx;
+  padding: 0;
+}
+
+.operation .btn-mode {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.operation .btn-pause {
+  width: 130rpx;
+  height: 130rpx;
+}
+
+/* 歌词区 */
+.lyric-list {
+  height: 100%;
+  /* padding: 100rpx 0; */
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
