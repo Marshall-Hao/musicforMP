@@ -1,5 +1,6 @@
 // pages/music-player/index.js
-import {getSongDetail} from '../../services/api_player'
+import {getSongDetail,getMusicUrl} from '../../services/api_player'
+import {audioContext} from '../../store/index'
 
 const app = getApp()
 Page({
@@ -10,7 +11,8 @@ Page({
   data: {
     currentSong:{},
     currentPage: 0,
-    isMusicLyric: true
+    isMusicLyric: true,
+    duration:0
   },
 
   /**
@@ -33,14 +35,23 @@ Page({
     })
 
     // 创建播放器
+    this.getAudioPlay(id)
   },
 
   // * services
   getPageData(id) {
     getSongDetail(id).then(res=>{
       this.setData({
-        currentSong:res.songs[0]
+        currentSong:res.songs[0],
+        duration: res.songs[0].dt
       })
+    })
+  },
+
+  getAudioPlay(id) {
+    getMusicUrl(id).then(res=>{
+      const url = res.data[0].url
+      this.createAudio(url)
     })
   },
 
@@ -50,5 +61,12 @@ Page({
     this.setData({
       currentPage:current
     })
+  },
+
+  // * api
+  createAudio(url) {
+    // * 全局只需要一个 音乐播放对象即可 共享对象
+    audioContext.src = url
+    audioContext.play()
   }
 })
