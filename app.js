@@ -3,7 +3,8 @@ App({
   globalData:{
     screenWidth:0,
     screenHeight:0,
-    statusHeight:0
+    statusHeight:0,
+    navBarHeight:44
   },
   onLaunch() {
     const info = wx.getSystemInfoSync() 
