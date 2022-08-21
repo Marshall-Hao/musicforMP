@@ -9,7 +9,8 @@ Page({
    */
   data: {
     currentSong:{},
-    currentPage: 0
+    currentPage: 0,
+    isMusicLyric: true
   },
 
   /**
@@ -24,11 +25,14 @@ Page({
     const screenHeight = globalData.screenHeight
     const statusBarHeight = globalData.statusHeight
     const navHeight = globalData.navBarHeight
+    const deviceRatio = globalData.deviceRatio
     const contentHeight = screenHeight - statusBarHeight - navHeight
     this.setData({
-      contentHeight
+      contentHeight,
+      isMusicLyric: deviceRatio >=2
     })
 
+    // 创建播放器
   },
 
   // * services

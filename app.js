@@ -4,7 +4,8 @@ App({
     screenWidth:0,
     screenHeight:0,
     statusHeight:0,
-    navBarHeight:44
+    navBarHeight:44,
+    deviceRatio: 0
   },
   onLaunch() {
     const info = wx.getSystemInfoSync() 
@@ -13,5 +14,8 @@ App({
     this.globalData.screenWidth= info.screenWidth
     this.globalData.screenHeight= info.screenHeight
     this.globalData.statusHeight = info.statusBarHeight
+
+    const deviceRatio = info.screenHeight / info.screenWidth
+    this.globalData.deviceRatio = deviceRatio
   },
 })
