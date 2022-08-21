@@ -27,7 +27,7 @@
       </view>
     </view>
     <!-- 小屏幕适配 -->
-    <view class="lyric" wx:if="{{isMusicLyric}}">我是歌词，纯纯粹粹</view>
+    <view class="lyric" wx:if="{{isMusicLyric}}">{{currentLyricText}}</view>
     <view class="progress">
       <slider 
         class="slider" 

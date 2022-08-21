@@ -12,9 +12,12 @@ Page({
   data: {
     currentSong:{},
     currentPage: 0,
+    currentLyricInfos:[],
     isMusicLyric: true,
     durationTime:0,
     currentTime:0,
+    currentLyricIndex: 0,
+    currentLyricText:"",
     sliderValue:0,
     // slider 拖拽优化体验
     isSliderChanging: false,
@@ -55,7 +58,9 @@ Page({
     getSongLyric(id).then(res=>{
       const lyric = res.lrc.lyric
       const lyrics =  parseLyric(lyric)
-      console.log(lyrics)
+      this.setData({
+        currentLyricInfos:lyrics
+      })
       // this.setData({
       //   lyric
       // })
@@ -116,8 +121,8 @@ Page({
 
     audioContext.onTimeUpdate(()=>{
       // * 转为毫秒
+      const currentTime =  parseInt(audioContext.currentTime) * 1000
       if (!this.data.isSliderChanging) {
-        const currentTime =  parseInt(audioContext.currentTime) * 1000
         this.setData({
           currentTime
         })
@@ -125,6 +130,22 @@ Page({
         this.setData({
           sliderValue:sliderValue
         })
+      }
+      // 查找当前播放的歌词
+      for (let i =0;i<this.data.currentLyricInfos.length;i++) {
+        const lyricInfo = this.data.currentLyricInfos[i]
+        if (currentTime < lyricInfo.time) {
+          const currentIndex = i -1
+          if (this.data.currentLyricIndex === currentIndex) return
+          const currentLyricInfo = this.data.currentLyricInfos[currentIndex]
+          console.log(currentLyricInfo.text)
+          this.setData({
+            currentLyricText:currentLyricInfo.text,
+            currentLyricIndex: currentIndex
+          })
+          // * 在当前的currentTime 找到了对应的i 就可以不找了 break跳出循环
+          break
+        }
       }
     })
   }
