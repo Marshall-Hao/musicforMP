@@ -12,7 +12,11 @@ Page({
     currentSong:{},
     currentPage: 0,
     isMusicLyric: true,
-    duration:0
+    durationTime:0,
+    currentTime:0,
+    sliderValue:0,
+    // slider 拖拽优化体验
+    isSliderChanging: false
   },
 
   /**
@@ -43,7 +47,7 @@ Page({
     getSongDetail(id).then(res=>{
       this.setData({
         currentSong:res.songs[0],
-        duration: res.songs[0].dt
+        durationTime: parseInt(res.songs[0].dt /1000)*1000
       })
     })
   },
@@ -62,11 +66,56 @@ Page({
       currentPage:current
     })
   },
+  handleSliderChange(event) {
+    const {value} = event.detail
 
+    //  百分比进度
+    const currentTime = this.data.durationTime * value / 100000
+    // this.setData({
+    //   currentTime
+    // })
+
+    // 定位音乐播放时间
+    audioContext.pause()
+    // seek api 寻找特定播放时间 只支持到s
+    audioContext.seek(currentTime)
+
+      this.setData({
+        sliderValue:value,
+        isSliderChanging:false
+      })
+    
+  },
+  handleSliderChanging(event) {
+    const {value} = event.detail
+    const currentTime = parseInt(this.data.durationTime * value / 100000) * 1000
+    this.setData({isSliderChanging:true, currentTime})
+  },
+  handlePause() {
+    audioContext.pause()
+  },
   // * api
   createAudio(url) {
     // * 全局只需要一个 音乐播放对象即可 共享对象
     audioContext.src = url
-    audioContext.play()
+    audioContext.autoplay = true
+    // * 检测是否解析完的回调 因为有解码时间
+    audioContext.onCanplay(()=>{
+      audioContext.play()
+    })
+
+    audioContext.onTimeUpdate(()=>{
+      // * 转为毫秒
+      if (!this.data.isSliderChanging) {
+        const currentTime =  parseInt(audioContext.currentTime) * 1000
+        this.setData({
+          currentTime
+        })
+        const sliderValue = currentTime/this.data.durationTime * 100
+        this.setData({
+          sliderValue:sliderValue
+        })
+      }
+    })
   }
 })

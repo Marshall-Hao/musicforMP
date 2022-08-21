@@ -29,16 +29,22 @@
     <!-- 小屏幕适配 -->
     <view class="lyric" wx:if="{{isMusicLyric}}">我是歌词，纯纯粹粹</view>
     <view class="progress">
-      <slider class="slider" block-size="12"></slider>
+      <slider 
+        class="slider" 
+        block-size="12" 
+        value="{{sliderValue}}"
+        bindchange="handleSliderChange"
+        bindchanging="handleSliderChanging"
+        ></slider>
       <view class="time">
-        <view class="current"></view>
-        <view class="duration">{{format.formatDuration(duration)}}</view>
+        <view class="current">{{format.formatDuration(currentTime)}}</view>
+        <view class="duration">{{format.formatDuration(durationTime)}}</view>
       </view>
     </view>
     <view class="operation">
       <image class="btn btn-mode" src="/assets/images/player/play_order.png"></image>
       <image class="btn btn-prev" src="/assets/images/player/play_prev.png"></image>
-      <image class="btn btn-pause" src="/assets/images/player/play_pause.png"></image>
+      <image class="btn btn-pause" src="/assets/images/player/play_pause.png" bindtap="handlePause"></image>
       <image class="btn btn-next" src="/assets/images/player/play_next.png"></image>
       <image class="btn btn-music" src="/assets/images/player/play_music.png"></image>
     </view>
