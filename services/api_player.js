@@ -12,3 +12,9 @@ export function getMusicUrl(id) {
     id
   })
 }
+
+export function getSongLyric(id) {
+  return hyRequest.get('lyric',{
+    id
+  })
+}

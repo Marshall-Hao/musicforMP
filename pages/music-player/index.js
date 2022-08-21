@@ -1,5 +1,6 @@
 // pages/music-player/index.js
-import {getSongDetail,getMusicUrl} from '../../services/api_player'
+import {getSongDetail,getMusicUrl,getSongLyric} from '../../services/api_player'
+import parseLyric from '../../utils/parse-lyric'
 import {audioContext} from '../../store/index'
 
 const app = getApp()
@@ -16,7 +17,8 @@ Page({
     currentTime:0,
     sliderValue:0,
     // slider 拖拽优化体验
-    isSliderChanging: false
+    isSliderChanging: false,
+    lyric:''
   },
 
   /**
@@ -49,6 +51,14 @@ Page({
         currentSong:res.songs[0],
         durationTime: parseInt(res.songs[0].dt /1000)*1000
       })
+    })
+    getSongLyric(id).then(res=>{
+      const lyric = res.lrc.lyric
+      const lyrics =  parseLyric(lyric)
+      console.log(lyrics)
+      // this.setData({
+      //   lyric
+      // })
     })
   },
 
