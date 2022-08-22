@@ -9,7 +9,8 @@ const RANKING_MAP = {
   2:'upRanking'
 }
 
-const thorttleQueryRect = throttle(queryRect)
+// *
+const thorttleQueryRect = throttle(queryRect,1000,{trailing:true})
 Page({
 
 

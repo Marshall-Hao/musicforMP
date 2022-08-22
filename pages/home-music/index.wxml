@@ -17,7 +17,7 @@
 >
   <block wx:for="{{banners}}" wx:key="index">
     <swiper-item class="swiper-item">
-     <!--图片加载完事件 -->
+     <!--图片加载完事件bindload widthFix  -->
       <image class="swiper-image" 
              src="{{item.pic}}" 
              mode="widthFix"
