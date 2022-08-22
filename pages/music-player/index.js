@@ -1,7 +1,7 @@
 // pages/music-player/index.js
 import {getSongDetail,getMusicUrl,getSongLyric} from '../../services/api_player'
 import parseLyric from '../../utils/parse-lyric'
-import {audioContext} from '../../store/index'
+import {audioContext,playerStore} from '../../store/index'
 
 const app = getApp()
 Page({
@@ -10,14 +10,16 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id:0,
     currentSong:{},
-    currentPage: 0,
     currentLyricInfos:[],
-    isMusicLyric: true,
     durationTime:0,
     currentTime:0,
     currentLyricIndex: 0,
     currentLyricText:"",
+    
+    isMusicLyric: true,
+    currentPage: 0,
     sliderValue:0,
     // slider 拖拽优化体验
     isSliderChanging: false,
@@ -30,8 +32,8 @@ Page({
    */
   onLoad: function (options) {
     const {id} = options
-    this.getPageData(id)
-
+    // this.getPageData(id)
+    this.setUpPlayerStore(id)
     // *动态计算高度
     const globalData = app.globalData
     const screenHeight = globalData.screenHeight
@@ -40,6 +42,7 @@ Page({
     const deviceRatio = globalData.deviceRatio
     const contentHeight = screenHeight - statusBarHeight - navHeight
     this.setData({
+      id,
       contentHeight,
       isMusicLyric: deviceRatio >=2
     })
@@ -150,6 +153,20 @@ Page({
           break
         }
       }
+    })
+  },
+
+  // store
+  setUpPlayerStore() {
+    playerStore.onStates(["currentSong","durationTime","currentLyricInfos"],({
+      currentSong,
+      durationTime,
+      currentLyricInfos
+    })=>{
+      // * 性能优化，只在发生变化的那个改变数据
+      if (currentSong) this.setData({currentSong})
+      if (durationTime) this.setData({durationTime})
+      if ( currentLyricInfos) this.setData({ currentLyricInfos})
     })
   }
 })
