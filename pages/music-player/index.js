@@ -1,6 +1,6 @@
 // pages/music-player/index.js
 import {audioContext,playerStore} from '../../store/index'
-
+const playModeNames = ['order','repeat','random']
 const app = getApp()
 Page({
 
@@ -22,7 +22,10 @@ Page({
     // slider 拖拽优化体验
     isSliderChanging: false,
     lyric:'',
-    lyricScrollTop:0
+    lyricScrollTop:0,
+
+    playMode:0,
+    playModeName:'order',
   },
 
   /**
@@ -85,7 +88,14 @@ Page({
   handlePause() {
     audioContext.pause()
   },
+  handleModeBtnClick() {
 
+    let playMode = this.data.playMode + 1
+    if (playMode === 3) playMode = 0
+
+    //  设置global state 里面的值
+    playerStore.setState("playMode",playMode)
+  },
 
   // store
   setUpPlayerStore() {
@@ -125,6 +135,15 @@ Page({
       if (currentLyricText) {
         this.setData({currentLyricText})
       }
+    })
+
+    //  监听播放模式
+    playerStore.onState("playMode",(playMode)=>{
+
+      this.setData({
+        playMode,
+        playModeName:playModeNames[playMode] 
+      })
     })
   }
 })

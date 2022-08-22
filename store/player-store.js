@@ -38,6 +38,8 @@ const playerStore = new HYEventStore({
     currentTime:0,
     currentLyricIndex: 0,
     currentLyricText:"",
+
+    playMode:0, //* 0顺序 1单曲 2随机
   },
   actions:{
     playMusicWithSongIdAction(ctx, {id}) {
