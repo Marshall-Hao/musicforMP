@@ -35,6 +35,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    // * 组件上的 点击事件 具体处理逻辑 由页面决定
+    handleLeftClick() {
+      this.triggerEvent('click')
+    }
   }
 })

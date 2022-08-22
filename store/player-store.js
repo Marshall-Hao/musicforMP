@@ -1,8 +1,28 @@
 // * 引用同一个对象
 const audioContext =  wx.createInnerAudioContext()
-import {getSongDetail,getSongLyric} from '../services/api_player'
+import {getSongDetail,getSongLyric,getMusicUrl} from '../services/api_player'
 import {HYEventStore} from 'hy-event-store'
 import parseLyric from '../utils/parse-lyric'
+
+function getAudioPlay(id) {
+  getMusicUrl(id).then(res=>{
+    const url = res.data[0].url
+    createAudio(url)
+  })
+}
+
+function  createAudio(url) {
+  // * 全局只需要一个 音乐播放对象即可 共享对象
+  audioContext.src = url
+  audioContext.autoplay = true
+  // * 检测是否解析完的回调 因为有解码时间
+  audioContext.onCanplay(()=>{
+    audioContext.play()
+  })
+
+}
+
+
 /**
  *  id:0,
     currentSong:{},
@@ -32,6 +52,7 @@ const playerStore = new HYEventStore({
         const lyrics =  parseLyric(lyric)
         ctx.currentLyricInfos = lyrics
       })
+      getAudioPlay(id)
     },
   }
 })

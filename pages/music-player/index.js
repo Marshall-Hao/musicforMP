@@ -48,28 +48,29 @@ Page({
     })
 
     // 创建播放器
-    this.getAudioPlay(id)
+    // this.getAudioPlay(id)
+    this.setupAudioContextListner()
   },
 
   // * services
-  getPageData(id) {
-    getSongDetail(id).then(res=>{
-      this.setData({
-        currentSong:res.songs[0],
-        durationTime: parseInt(res.songs[0].dt /1000)*1000
-      })
-    })
-    getSongLyric(id).then(res=>{
-      const lyric = res.lrc.lyric
-      const lyrics =  parseLyric(lyric)
-      this.setData({
-        currentLyricInfos:lyrics
-      })
-      // this.setData({
-      //   lyric
-      // })
-    })
-  },
+  // getPageData(id) {
+  //   getSongDetail(id).then(res=>{
+  //     this.setData({
+  //       currentSong:res.songs[0],
+  //       durationTime: parseInt(res.songs[0].dt /1000)*1000
+  //     })
+  //   })
+  //   getSongLyric(id).then(res=>{
+  //     const lyric = res.lrc.lyric
+  //     const lyrics =  parseLyric(lyric)
+  //     this.setData({
+  //       currentLyricInfos:lyrics
+  //     })
+  //     // this.setData({
+  //     //   lyric
+  //     // })
+  //   })
+  // },
 
   getAudioPlay(id) {
     getMusicUrl(id).then(res=>{
@@ -110,6 +111,12 @@ Page({
     const currentTime = parseInt(this.data.durationTime * value / 100000) * 1000
     this.setData({isSliderChanging:true, currentTime})
   },
+
+  handleClick() {
+    wx.navigateBack({
+      delta: 0,
+    })
+  },
   handlePause() {
     audioContext.pause()
   },
@@ -122,7 +129,9 @@ Page({
     audioContext.onCanplay(()=>{
       audioContext.play()
     })
+  },
 
+  setupAudioContextListner() {
     audioContext.onTimeUpdate(()=>{
       // * 转为毫秒
       const currentTime =  parseInt(audioContext.currentTime) * 1000
@@ -155,7 +164,6 @@ Page({
       }
     })
   },
-
   // store
   setUpPlayerStore() {
     playerStore.onStates(["currentSong","durationTime","currentLyricInfos"],({
