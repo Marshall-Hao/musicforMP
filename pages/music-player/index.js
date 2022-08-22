@@ -26,6 +26,9 @@ Page({
 
     playMode:0,
     playModeName:'order',
+
+    isPlaying:false,
+    playingName: 'pause'
   },
 
   /**
@@ -86,7 +89,8 @@ Page({
     wx.navigateBack()
   },
   handlePause() {
-    audioContext.pause()
+    // 判断播放状态
+    playerStore.dispatch('changeMusicPlayingAction')
   },
   handleModeBtnClick() {
 
@@ -138,12 +142,22 @@ Page({
     })
 
     //  监听播放模式
-    playerStore.onState("playMode",(playMode)=>{
-
+    playerStore.onStates(["playMode","isPlaying"],({playMode,isPlaying})=>{ 
+      // 可能会为0
+    if (playMode !== undefined) {
       this.setData({
-        playMode,
-        playModeName:playModeNames[playMode] 
-      })
+         playMode,
+         playModeName:playModeNames[playMode] 
+       })
+    }
+
+    // 可能会为false
+      if (isPlaying !== undefined) {
+        this.setData({
+          isPlaying,
+          playingName: isPlaying ? 'pause':'resume'
+        })
+      }
     })
   }
 })

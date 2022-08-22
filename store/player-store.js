@@ -40,9 +40,11 @@ const playerStore = new HYEventStore({
     currentLyricText:"",
 
     playMode:0, //* 0顺序 1单曲 2随机
+    isPlaying: false
   },
   actions:{
     playMusicWithSongIdAction(ctx, {id}) {
+      ctx.isPlaying = true
       // 详情
       getSongDetail(id).then(res=>{
           ctx.currentSong=  res.songs[0],
@@ -85,6 +87,10 @@ const playerStore = new HYEventStore({
         }
       })
     },
+    changeMusicPlayingAction(ctx) {
+      ctx.isPlaying = !ctx.isPlaying
+      ctx.isPlaying ? audioContext.play():audioContext.pause()
+    }
   }
 })
 

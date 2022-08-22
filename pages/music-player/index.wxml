@@ -48,7 +48,7 @@
              >
       </image>
       <image class="btn btn-prev" src="/assets/images/player/play_prev.png"></image>
-      <image class="btn btn-pause" src="/assets/images/player/play_pause.png" bindtap="handlePause"></image>
+      <image class="btn btn-pause" src="/assets/images/player/play_{{playingName}}.png" bindtap="handlePause"></image>
       <image class="btn btn-next" src="/assets/images/player/play_next.png"></image>
       <image class="btn btn-music" src="/assets/images/player/play_music.png"></image>
     </view>
