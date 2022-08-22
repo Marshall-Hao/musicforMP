@@ -9,7 +9,7 @@ const RANKING_MAP = {
   2:'upRanking'
 }
 
-// *
+// * 防止第一次没计算对，最后一次也计算 预防小程序内置bug
 const thorttleQueryRect = throttle(queryRect,1000,{trailing:true})
 Page({
 

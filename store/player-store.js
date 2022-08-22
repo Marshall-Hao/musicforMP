@@ -44,7 +44,20 @@ const playerStore = new HYEventStore({
   },
   actions:{
     playMusicWithSongIdAction(ctx, {id}) {
+      if (ctx.id === id) {
+        this.dispatch('changeMusicPlayingAction',true)
+        return
+      }
+      ctx.id = id
       ctx.isPlaying = true
+      //  重置去除 切歌残影
+      ctx.currentTime = {}
+      ctx.durationTime = 0
+      ctx.currentLyricInfos = []
+
+      ctx.currentTime = 0
+      ctx.currentLyricIndex = 0
+      ctx.currentLyricText = ''
       // 详情
       getSongDetail(id).then(res=>{
           ctx.currentSong=  res.songs[0],
@@ -87,8 +100,9 @@ const playerStore = new HYEventStore({
         }
       })
     },
-    changeMusicPlayingAction(ctx) {
-      ctx.isPlaying = !ctx.isPlaying
+    // 提高拓展性
+    changeMusicPlayingAction(ctx, isPlaying = true) {
+      ctx.isPlaying = isPlaying
       ctx.isPlaying ? audioContext.play():audioContext.pause()
     }
   }

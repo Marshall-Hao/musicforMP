@@ -90,7 +90,7 @@ Page({
   },
   handlePause() {
     // 判断播放状态
-    playerStore.dispatch('changeMusicPlayingAction')
+    playerStore.dispatch('changeMusicPlayingAction',!this.data.isPlaying)
   },
   handleModeBtnClick() {
 
