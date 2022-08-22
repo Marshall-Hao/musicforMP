@@ -128,13 +128,41 @@
 /* 歌词区 */
 .lyric-list {
   height: 100%;
+  /* 可以上下来回滚动 */
   /* padding: 100rpx 0; */
   box-sizing: border-box;
   overflow: hidden;
 }
 
+/* 去除滚动条 */
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
   color: transparent;
 }
+
+.lyric-list .item {
+  height: 35px;
+  line-height: 35px;
+  font-size: 28rpx;
+  text-align: center;
+  color: #989898;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lyric-list .item.active {
+  color: #26ce8a;
+  font-size: 36rpx;
+}
+
+/* scrollview 上下留空间 */
+/* .lyric-list .item:first-of-type {
+  padding-top: 100rpx;
+}
+
+.lyric-list .item:last-of-type {
+  padding-bottom: 100rpx;
+} */
