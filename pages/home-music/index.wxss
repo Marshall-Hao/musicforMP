@@ -7,7 +7,8 @@
 }
 
 page {
-  padding: 0 20rpx 50px;
+  /* padding 解决内置元素 fixed 预留空间问题 */
+  padding: 0 20rpx;
 }
 .swiper {
   border-radius: 12rpx;
@@ -25,6 +26,9 @@ page {
   width: 100%;
 }
 
+.play-bar-placeholder {
+  height: 50px;
+}
 
 .play-bar {
   display: flex;

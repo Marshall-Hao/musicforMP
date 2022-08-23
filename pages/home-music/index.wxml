@@ -59,7 +59,9 @@
 </view>
 
 <!-- workstation -->
-<view class="play-bar">
+<view class="play-bar-placeholder" wx:if="{{currentSong.id}}"></view>
+<!-- {}也是有 Object.keys 不能直接在template页用fn 要wxs -->
+<view class="play-bar" wx:if="{{currentSong.id}}" bindtap="handlePlayBarClick">
   <view class="left">
     <image 
     style="animation-play-state:{{playAnimationState}}"
@@ -72,7 +74,7 @@
   <view class="right">
     <image class="icon play" 
            src="/assets/images/music/{{isPlaying ? 'pause':'play'}}_icon.png"
-           bindtap="handlePlayClick"
+           catchtap="handlePlayClick"
            >
     </image>
     <image class="icon playlist" src="/assets/images/music/playlist_icon.png"></image>

@@ -98,7 +98,11 @@ Page({
   handlePlayClick() {
        playerStore.dispatch("changeMusicPlayingAction", !this.data.isPlaying )
   },
-
+  handlePlayBarClick() {
+    wx.navigateTo({
+      url: `/pages/music-player/index?id=${this.data.currentSong.id}`,
+    })
+  },
   // * services
   getPageData() {
     getBanners().then(res=> {
