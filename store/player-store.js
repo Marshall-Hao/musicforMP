@@ -46,8 +46,9 @@ const playerStore = new HYEventStore({
     playListIndex:0
   },
   actions:{
-    playMusicWithSongIdAction(ctx, {id}) {
-      if (ctx.id === id) {
+    playMusicWithSongIdAction(ctx, {id,isRefresh= false}) {
+      // 隐式转换
+      if (ctx.id == id && !isRefresh) {
         this.dispatch('changeMusicPlayingAction',true)
         return
       }
@@ -107,6 +108,40 @@ const playerStore = new HYEventStore({
     changeMusicPlayingAction(ctx, isPlaying = true) {
       ctx.isPlaying = isPlaying
       ctx.isPlaying ? audioContext.play():audioContext.pause()
+    },
+    // 因为歌曲切换是全局需要用到的 所以封装到 globalstore里 全局享用
+    changeMusicAction(ctx,isNext = true) {
+      let index = ctx.playListIndex
+
+      //  * 根据不同播放模式 决定下一首索引
+      switch(ctx.playMode) {
+        case 0: // 顺序
+          index = isNext? index + 1 : index - 1
+          //  边际情况
+          if (index == -1) index = ctx.playListSongs.length - 1
+          if (index == ctx.playListSongs.length) index = 0
+          break
+        case 1: // 重复
+          break
+        case 2: //随机
+          index = Math.floor(Math.random * ctx.playListSongs.length)
+          break
+      }
+      //  获取歌曲
+      let currentSong = ctx.playListSongs[index]
+      // 考虑没有播放列表的情况
+      if (!currentSong) {
+        currentSong = ctx.currentSong
+      } else {
+        // 更新索引
+        ctx.playListIndex = index
+      }
+
+      //  播放新的歌曲
+      this.dispatch("playMusicWithSongIdAction",{id:currentSong.id,isRefresh:true})
+      // if (action === 'next') {
+
+      // }
     }
   }
 })

@@ -104,6 +104,13 @@ Page({
     playerStore.setState("playMode",playMode)
   },
 
+  // * 需要根据playMode
+  handlePrev() {
+    playerStore.dispatch("changeMusicAction",false)
+  },
+  handleNext() {
+    playerStore.dispatch("changeMusicAction")
+  },
   // store
   setUpPlayerStore() {
     // * 监听这几个
