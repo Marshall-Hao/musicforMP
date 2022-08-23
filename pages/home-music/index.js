@@ -21,24 +21,18 @@ Page({
     hotPlaylist:[],
     recommednPlaylist:[],
     // * 为了固定的顺序
-    ranking:{0:{},1:{},2:{}}
+    ranking:{0:{},1:{},2:{}},
+
+    currentSong:[],
+    isPlaying:false,
+
+    playAnimationState: 'paused'
   },
 
 
   onLoad: function (options) {
     this.getPageData()
-    // * 执行action
-    rankingStore.dispatch("getRankingDataAction")
-    //  获取store中的数据
-    rankingStore.onState('hotRanking',res=>{
-      const recommendSongs = res?.tracks?.slice(0,6)
-      this.setData({
-        recommendSongs
-      })
-    })
-    rankingStore.onState('newRanking',this.getRankingHandler(0))
-    rankingStore.onState('originalRanking',this.getRankingHandler(1))
-    rankingStore.onState('upRanking',this.getRankingHandler(2))
+    this.setUpPlayerStoreListner()
   },
 
   onUnload: function() {
@@ -98,6 +92,11 @@ Page({
     const index = event.currentTarget.dataset.index
     playerStore.setState('playListSongs',this.data.recommendSongs)
     playerStore.setState('playListIndex',index)
+
+  },
+
+  handlePlayClick() {
+       playerStore.dispatch("changeMusicPlayingAction", !this.data.isPlaying )
   },
 
   // * services
@@ -119,7 +118,31 @@ Page({
           recommednPlaylist:res.playlists
         })
     })
-  }
+  },
 
+  //  * store
+  setUpPlayerStoreListner() {
+       // * 执行action
+    rankingStore.dispatch("getRankingDataAction")
+    //  获取store中的数据
+    rankingStore.onState('hotRanking',res=>{
+      const recommendSongs = res?.tracks?.slice(0,6)
+      this.setData({
+        recommendSongs
+      })
+    })
+    rankingStore.onState('newRanking',this.getRankingHandler(0))
+    rankingStore.onState('originalRanking',this.getRankingHandler(1))
+    rankingStore.onState('upRanking',this.getRankingHandler(2))
+
+    //  播放器
+    playerStore.onStates(["currentSong","isPlaying"],({currentSong,isPlaying}) =>{
+      if (currentSong) this.setData({currentSong})
+      if (isPlaying !== undefined) this.setData({
+          isPlaying,
+          playAnimationState: isPlaying?"running":"paused"
+        })
+    })
+  }
 
 })

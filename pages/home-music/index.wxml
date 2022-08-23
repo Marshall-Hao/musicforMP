@@ -57,3 +57,24 @@
     </block>
   </view>
 </view>
+
+<!-- workstation -->
+<view class="play-bar">
+  <view class="left">
+    <image 
+    style="animation-play-state:{{playAnimationState}}"
+    class="album album-animation" 
+    mode="aspectFill" 
+    src="{{currentSong.al.picUrl}}" >
+    </image>
+    <view class="name">{{currentSong.name}}</view>
+  </view>
+  <view class="right">
+    <image class="icon play" 
+           src="/assets/images/music/{{isPlaying ? 'pause':'play'}}_icon.png"
+           bindtap="handlePlayClick"
+           >
+    </image>
+    <image class="icon playlist" src="/assets/images/music/playlist_icon.png"></image>
+  </view>
+</view>
