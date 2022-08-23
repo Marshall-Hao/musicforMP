@@ -30,6 +30,8 @@ function  createAudio(url) {
  */
 const playerStore = new HYEventStore({
   state:{
+    ifFirstPlay: true,
+
     id:0,
     currentSong:{},
     durationTime:0,
@@ -74,7 +76,11 @@ const playerStore = new HYEventStore({
         ctx.currentLyricInfos = lyrics
       })
       getAudioPlay(id)
-      this.dispatch("setupAudioContextListner")
+      if (ctx.ifFirstPlay) {
+        // * 只需要在第一次播放的时候去注册 播放器监听时间，后续的用它就好了 一种优化
+          this.dispatch("setupAudioContextListner")
+          ctx.ifFirstPlay = false
+      }
     },
     setupAudioContextListner(ctx) {
        // * 检测是否解析完的回调 因为有解码时间
@@ -103,6 +109,10 @@ const playerStore = new HYEventStore({
           }
         }
       })
+      
+      audioContext.onEnded(() =>{
+        this.dispatch("changeMusicAction")
+      })
     },
     // 提高拓展性
     changeMusicPlayingAction(ctx, isPlaying = true) {
@@ -124,7 +134,7 @@ const playerStore = new HYEventStore({
         case 1: // 重复
           break
         case 2: //随机
-          index = Math.floor(Math.random * ctx.playListSongs.length)
+          index = Math.floor(Math.random() * ctx.playListSongs.length)
           break
       }
       //  获取歌曲
