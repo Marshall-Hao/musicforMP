@@ -40,7 +40,10 @@ const playerStore = new HYEventStore({
     currentLyricText:"",
 
     playMode:0, //* 0顺序 1单曲 2随机
-    isPlaying: false
+    isPlaying: false,
+
+    playListSongs:[],
+    playListIndex:0
   },
   actions:{
     playMusicWithSongIdAction(ctx, {id}) {

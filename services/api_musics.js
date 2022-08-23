@@ -23,7 +23,7 @@ export function getSongMenu(cat="全部",limit=6,offset=10) {
 }
 
 export function getSongMenuDetails(id) {
-  return hyRequest.get('playlist/detail/dynamic',{
+  return hyRequest.get('playlist/detail',{
     id
   })
 }

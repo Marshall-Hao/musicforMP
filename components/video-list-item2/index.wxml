@@ -1,6 +1,6 @@
 <!--components/video-list-item2/index.wxml-->
 <wxs module="format" src="../../utils/format.wxs"></wxs>
-<view class="item">
+<view class="item" bindtap="">
   <view class="album">
     <image class="image" mode="widthFix" src="{{itemInfo.coverUrl}}"></image>
     <view class="info">

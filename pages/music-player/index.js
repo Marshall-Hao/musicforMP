@@ -28,7 +28,10 @@ Page({
     playModeName:'order',
 
     isPlaying:false,
-    playingName: 'pause'
+    playingName: 'pause',
+
+    playListSongs:[],
+    playListIndex: 0
   },
 
   /**

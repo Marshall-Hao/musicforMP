@@ -77,9 +77,10 @@ Page({
     // * 可以添加历史搜索功能 使用LRU 优化
 
     const {searchValue} = this.data
-    getSuggestSearch(searchValue).then(res=>{
+    getSearchResult(searchValue).then(res=>{
+      console.log(res)
       this.setData({
-        resultSongs:res.result.allMatch
+        resultSongs:res.result.songs
       })
     })
   },

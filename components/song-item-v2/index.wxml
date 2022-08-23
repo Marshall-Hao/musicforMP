@@ -5,7 +5,7 @@
     <view class="name">{{item.name}}</view>
     <view class="source">
       <image class="icon" src="/assets/images/icons/sq_icon.png"></image>
-      <text>{{item.ar[0].name}} </text>
+      <text>{{item.ar[0].name || item.artists[0].name}} </text>
       <!-- * 增加空格 -->
       <text wx:if="{{item.alia[0]}}" decode="true"> &nbsp;· {{item.alia[0]}}</text>  
     </view>

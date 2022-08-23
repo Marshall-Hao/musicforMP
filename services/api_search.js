@@ -11,7 +11,7 @@ export function getSuggestSearch(keywords) {
 }
 
 export function getSearchResult(keywords) {
-  hyRequest.get('search', {
+  return hyRequest.get('search', {
     keywords
   })
 }

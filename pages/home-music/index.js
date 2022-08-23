@@ -1,5 +1,5 @@
 // pages/home-music/index.js
-import {rankingStore,rankingMap} from '../../store/index'
+import {rankingStore,rankingMap,playerStore} from '../../store/index'
 import {getBanners,getSongMenu} from '../../services/api_musics'
 import {queryRect} from '../../utils/selectorRec'
 import throttle from '../../utils/throttle'
@@ -93,6 +93,13 @@ Page({
       url: `/pages/detail-lists/index?ranking=${rankingName}&type=rank`,
     })
   },
+
+  handleSongItemClick(event) {
+    const index = event.currentTarget.dataset.index
+    playerStore.setState('playListSongs',this.data.recommendSongs)
+    playerStore.setState('playListIndex',index)
+  },
+
   // * services
   getPageData() {
     getBanners().then(res=> {
