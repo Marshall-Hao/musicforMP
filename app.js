@@ -1,5 +1,5 @@
 // app.js
-import {getLoginCode,sendCodeToServer} from './services/api_login'
+import {getLoginCode,sendCodeToServer,checkToken,checkSession} from './services/api_login'
 
 App({
   globalData:{
@@ -9,7 +9,7 @@ App({
     navBarHeight:44,
     deviceRatio: 0
   },
-  onLaunch() {
+  async onLaunch() {
     const info = wx.getSystemInfoSync() 
     // console.log(info)
     // * 因为不用响应书渲染页面 直接赋值就好
@@ -21,7 +21,18 @@ App({
     this.globalData.deviceRatio = deviceRatio
 
     // 让用户默认进行登录
-    this.loginAction()
+    // 如果storage里面有值不需要再进行登入了
+    const token = wx.getStorageSync('token')
+    // 检查token有没有过期
+    const checkResult = await checkToken(token)
+    console.log(checkResult)
+    // 判断session是否过期 session过期了 有些功能也没法用
+    const isSessionExpire = await checkSession()
+    console.log(isSessionExpire)
+    // 否则重新请求
+    if (!token || checkResult.errorCode || !isSessionExpire) {
+      this.loginAction()
+    }
   },
 
   async loginAction() {

@@ -19,3 +19,22 @@ export function getLoginCode() {
 export function sendCodeToServer(code) {
   return hyLoginRequest.post('login',{code})
 }
+
+export function checkToken(token) {
+  return hyLoginRequest.post('auth',{},{
+    token
+  })
+}
+
+export function checkSession() {
+  return new Promise((resolve,reject)=>{
+    wx.checkSession({
+      success: (res) => {
+        resolve(true)
+      },
+      fail: () =>{
+       resolve(false)
+      }
+    })
+  })
+}

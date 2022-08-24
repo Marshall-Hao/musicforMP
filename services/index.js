@@ -7,11 +7,12 @@ class HYRequest {
     this.baseUrl = baseUrl
   }
 
-  request(url,method,params) {
+  request(url,method,params,header={}) {
     return new Promise((resolve,reject)=> {
       wx.request({
         url: this.baseUrl + url,
         method,
+        header:header,
         data: params,
         success(res) {
           resolve(res.data)
@@ -23,12 +24,12 @@ class HYRequest {
     })
   }
 
-  get(url,params) {
-    return this.request(url,"GET",params)
+  get(url,params,header) {
+    return this.request(url,"GET",params,header)
   }
 
-  post(url,data) {
-    return this.request(url,"POST",data)
+  post(url,data,header) {
+    return this.request(url,"POST",data,header)
   }
 }
 
