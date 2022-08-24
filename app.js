@@ -21,6 +21,18 @@ App({
     this.globalData.deviceRatio = deviceRatio
 
     // 让用户默认进行登录
+    this.handleLogin()
+
+    // 获取用户信息,此方法必须通过事件触发
+    // wx.getUserProfile({
+    //   desc: '你好啊',
+    //   success:res =>{
+    //     console.log(res)
+    //   }
+    // })
+  },
+
+  async handleLogin() {
     // 如果storage里面有值不需要再进行登入了
     const token = wx.getStorageSync('token')
     // 检查token有没有过期

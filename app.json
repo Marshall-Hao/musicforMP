@@ -5,7 +5,8 @@
     "pages/detail-video/index",
     "pages/detail-search/index",
     "pages/detail-lists/index",
-    "pages/music-player/index"
+    "pages/music-player/index",
+    "pages/home-profile/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -14,7 +15,9 @@
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
-  "requiredBackgroundModes": ["audio"],
+  "requiredBackgroundModes": [
+    "audio"
+  ],
   "tabBar": {
     "list": [
       {
@@ -28,6 +31,12 @@
         "text": "视频",
         "iconPath": "assets/images/tabbar/video_normal.png",
         "selectedIconPath": "assets/images/tabbar/video_active.png"
+      },
+      {
+        "pagePath": "pages/home-profile/index",
+        "text": "我的",
+        "iconPath": "assets/images/tabbar/profile_normal.png",
+        "selectedIconPath": "assets/images/tabbar/profile_active.png"
       }
     ]
   }
