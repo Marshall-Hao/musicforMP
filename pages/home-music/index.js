@@ -59,7 +59,7 @@ Page({
   // * events
   handleSearchClick() {
     wx.navigateTo({
-      url: '/pages/detail-search/index',
+      url: '/packageDetail/detail-search/index',
     })
   },
 
@@ -84,7 +84,7 @@ Page({
 
   navigateToDetailSongsPage(rankingName) {
     wx.navigateTo({
-      url: `/pages/detail-lists/index?ranking=${rankingName}&type=rank`,
+      url: `/packageDetail/detail-lists/index?ranking=${rankingName}&type=rank`,
     })
   },
 

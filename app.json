@@ -2,12 +2,26 @@
   "pages": [
     "pages/home-music/index",
     "pages/home-video/index",
-    "pages/detail-video/index",
-    "pages/detail-search/index",
-    "pages/detail-lists/index",
     "pages/music-player/index",
     "pages/home-profile/index"
   ],
+  "subPackages": [
+    {
+      "root": "packageDetail",
+      "name": "pDetail",
+      "pages": [
+        "detail-search/index",
+        "detail-video/index",
+        "detail-lists/index"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/home-music/index": {
+      "network": "all",
+      "packages": ["packageDetail"]
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
