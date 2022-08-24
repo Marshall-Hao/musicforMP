@@ -1,4 +1,6 @@
 // app.js
+import {getLoginCode,sendCodeToServer} from './services/api_login'
+
 App({
   globalData:{
     screenWidth:0,
@@ -17,5 +19,19 @@ App({
 
     const deviceRatio = info.screenHeight / info.screenWidth
     this.globalData.deviceRatio = deviceRatio
+
+    // 让用户默认进行登录
+    this.loginAction()
   },
+
+  async loginAction() {
+    //  获取code
+    const code =  await getLoginCode()
+    
+    // code 发送给服务器
+    const result = await sendCodeToServer(code)
+    const token = result.token
+    wx.setStorageSync('token', token)
+    // 
+  }
 })

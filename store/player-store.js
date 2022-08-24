@@ -33,7 +33,9 @@ function  createAudio(url,id) {
  */
 const playerStore = new HYEventStore({
   state:{
+    url:'',
     ifFirstPlay: true,
+    isStoping: false,
 
     id:0,
     currentSong:{},
@@ -69,7 +71,7 @@ const playerStore = new HYEventStore({
       ctx.currentLyricText = ''
       // 详情
       getSongDetail(id).then(res=>{
-        console.log(res.songs[0])
+    
           ctx.currentSong=  res.songs[0],
           ctx.durationTime =  parseInt(res.songs[0].dt /1000)*1000
           // getBackgroundAudioManager 特殊 需求
@@ -81,7 +83,13 @@ const playerStore = new HYEventStore({
         const lyrics =  parseLyric(lyric)
         ctx.currentLyricInfos = lyrics
       })
-      getAudioPlay(id)
+      getMusicUrl(id).then(res=>{
+        const url = res.data[0].url
+        ctx.url = url
+        audioContext.src = url
+        audioContext.title = id
+        audioContext.autoplay = true
+      })
       if (ctx.ifFirstPlay) {
         // * 只需要在第一次播放的时候去注册 播放器监听时间，后续的用它就好了 一种优化
           this.dispatch("setupAudioContextListner")
@@ -119,10 +127,30 @@ const playerStore = new HYEventStore({
       audioContext.onEnded(() =>{
         this.dispatch("changeMusicAction")
       })
+
+      // 监听音乐暂停 播放
+      audioContext.onPlay(() => {
+        ctx.isPlaying = true
+      })
+
+      audioContext.onPause(() =>{
+        ctx.isPlaying = false
+      })
+      // 停止状态
+      audioContext.onStop(()=>{
+        ctx.isPlaying = false
+        ctx.isStoping = true
+      })
     },
     // 提高拓展性
     changeMusicPlayingAction(ctx, isPlaying = true) {
       ctx.isPlaying = isPlaying
+      // 优化 后台停止 再返回 重新播放
+      if (ctx.isPlaying && ctx.isStoping) {
+        audioContext.src = ctx.url
+        audioContext.title = ctx.currentSong.name
+        ctx.isStoping = false
+      }
       ctx.isPlaying ? audioContext.play():audioContext.pause()
     },
     // 因为歌曲切换是全局需要用到的 所以封装到 globalstore里 全局享用

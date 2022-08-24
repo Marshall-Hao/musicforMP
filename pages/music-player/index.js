@@ -71,8 +71,8 @@ Page({
     //  百分比进度
     const currentTime = this.data.durationTime * value / 100000
 
-    // 定位音乐播放时间
-    audioContext.pause()
+    // 定位音乐播放时间 微调 小播放bug
+    // audioContext.pause()
     // seek api 寻找特定播放时间 只支持到s
     audioContext.seek(currentTime)
 
