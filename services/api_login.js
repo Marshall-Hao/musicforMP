@@ -20,10 +20,8 @@ export function sendCodeToServer(code) {
   return hyLoginRequest.post('login',{code})
 }
 
-export function checkToken(token) {
-  return hyLoginRequest.post('auth',{},{
-    token
-  })
+export function checkToken() {
+  return hyLoginRequest.post('auth',{},true)
 }
 
 export function checkSession() {

@@ -24,11 +24,11 @@ App({
     // 如果storage里面有值不需要再进行登入了
     const token = wx.getStorageSync('token')
     // 检查token有没有过期
-    const checkResult = await checkToken(token)
-    console.log(checkResult)
+    const checkResult = await checkToken()
+    // console.log(checkResult)
     // 判断session是否过期 session过期了 有些功能也没法用
     const isSessionExpire = await checkSession()
-    console.log(isSessionExpire)
+    // console.log(isSessionExpire)
     // 否则重新请求
     if (!token || checkResult.errorCode || !isSessionExpire) {
       this.loginAction()
