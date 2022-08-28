@@ -56,6 +56,9 @@ Page({
 
   },
 
+  onUnload() {
+    // todo:用来做 取消数据监听
+  },
   // * services
 
   // events
